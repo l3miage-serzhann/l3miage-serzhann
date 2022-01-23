@@ -1,0 +1,54 @@
+--=========================================================================
+--                          Modèle de classe
+---------------------------------------------------------------------------
+-- Ce modèle de classe est exprimé en ClassScript1.
+-- Voir https://modelscript.readthedocs.io/en/latest/languages/classes1/index.html
+-- ClassScript1 est une version annotée du langage USE OCL.
+-- Les annotations sont en commentaires et commencent par :
+--    "@" pour les annotations d'instructions,
+--    "|" pour les annotations de documentation.
+--=========================================================================
+--
+
+model CyberSalaires
+
+enum Periode {
+    semaine,
+    mois
+}
+
+class Personne
+    attributes
+        nom : String
+        age : Integer
+end
+
+class Emploi
+    attributes
+        salaire : Real
+        periode : Periode
+end
+
+class Compagnie
+    attributes
+	nom : String
+	ca : Integer
+end
+
+class CompagnieDExploitation < Compagnie
+    -- NOTE : l'héritage est symbolisé par "<" ci-dessus
+    attributes
+        rang : Integer
+end
+
+association APourEmploi
+    between
+        Personne[1] role employe
+        Emploi[*] role emplois
+end
+association EstEmploiDans
+    between
+        Emploi[1] role emplois
+        Compagnie[*] role employeur
+end
+-- TODO: ajouter les associations manquantes

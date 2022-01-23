@@ -1,0 +1,39 @@
+--| Mario, 34 ans, touche 1000€ par mois à ABElectronics.
+--| ABElectronics a 3 millions de chiffre d'affaire.
+    ! create m : Personne
+    ! m.nom := 'mario'
+    ! m.age := 34000000000
+
+    ! create e1 : Emploi
+    ! e1.salaire := 1000.0
+    ! e1.periode := Periode::mois
+
+    ! insert (m,e1) into APourEmploi
+    
+    ! create abe: Compagnie
+    ! abe.nom := 'ABElectronics'
+    ! abe.ca := 3000000
+
+    ! insert (e1,abe) into EstEmploiDans
+    -- TODO: ajouter l'objet abe 
+    ! create e2 : Emploi
+    ! e2.salaire := 500.0
+    ! e2.periode := Periode::semaine
+
+    ! insert (m,e2) into APourEmploi
+    -- TODO: ajouter le lien e1 EstEmploiDans abe
+
+    
+--| Mario touche 500€ par semaine à PetroGaz.
+--| PetroGaz est une compagnie d'exploitation.
+--| Le chiffre d'affaire de PetroGaz est de 10 millions d'euros.
+--| Le rang mondial de PetroGaz est 238
+
+    -- TODO
+    ! create pg: CompagnieDExploitation
+    ! pg.nom := 'PetroGaz'
+    ! pg.ca := 10000000
+    ! pg.rang:= 238
+
+    ! insert (e2,pg) into EstEmploiDans
+
