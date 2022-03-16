@@ -99,7 +99,9 @@ class Person {
     }
     /*...*/
     setTeam(team){
-        
+        if (team instanceof Team) {
+            throw new Error("team must be a Team.")
+        }
         if(this._team==team){
             return
         }
@@ -210,17 +212,38 @@ class Team {
     addMembers(members){
         if(members instanceof Set){
             for(const value of members){
+                if (!(value instanceof Person)){
+                    throw new Error("member must be a Person.")
+                }
                 value.setTeam(this)
             }
         }
-        else{
+        else if (members instanceof Person){
             this._members.add(members)
         }
-       
-    
+        else{
+            throw new Error("members must be a set.")
+        }
+    }
+    // #issue1 to verify (and implement to addMembers)
+    addMember(member){
+        if (!(member instanceof Person)){
+            throw new Error("member must be a Person.")
+        }
+        this._members.add(member)
     }
     getMembers(){
         return this._members
+    }
+    // #issue1(related) ask prof about scnTeams2 doesnt have all the cases ( optimize the other function if its ok)
+    removeMember(member){
+        if (!(member instanceof Person)){
+            throw new Error("member must be a Person.")
+        }
+        if (!(member in this._members)){
+            throw new Error("removal failed: this team is not the team of the person.")
+        }
+        this._members.delete(member)
     }
 }
 
