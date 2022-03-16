@@ -38,6 +38,7 @@ class Person {
         this._name = name
         this._age= age
         this._cars=new Set()
+        this._team==null
         /*...*/
         
     }
@@ -78,13 +79,9 @@ class Person {
         this._cars.add(car)
     }
     addOwnedCars(cars){
-        
         for (const value of cars) {
             this._cars.add(value) // logs 1, 2 and 3
           }
-        
-            
-        
     }
     removeOwnedCar(car){
         if (!(car instanceof Car)){
@@ -101,6 +98,28 @@ class Person {
         return false
     }
     /*...*/
+    setTeam(team){
+        
+        if(this._team==team){
+            return
+        }
+        if(this._team==null){
+            this._team=team
+            this._team.addMembers(this)
+        }
+        else if(team==null){
+            this._team._members.delete(this)
+            this._team=team
+        }
+        else{
+            this._team._members.delete(this)
+            this._team=team
+            this._team.addMembers(this)
+        }
+    }
+    getTeam(){
+        return this._team
+    }
 }
 
 
@@ -171,6 +190,38 @@ class Car {
  */
 class Team {
     /*...*/
+    constructor(name,number){
+        if (typeof name !== 'string') {
+             throw new Error("name must be a string.")
+         }
+        if ((typeof number !== 'number')||((isInt(number))===false)) {
+            throw new Error("number must be an Integer.")
+        }
+        this._name=name
+        this._number=number
+        this._members=new Set()
+    }
+    getName(){
+        return this._name
+    }
+    getNumber(){
+        return this._number
+    }
+    addMembers(members){
+        if(members instanceof Set){
+            for(const value of members){
+                value.setTeam(this)
+            }
+        }
+        else{
+            this._members.add(members)
+        }
+       
+    
+    }
+    getMembers(){
+        return this._members
+    }
 }
 
 module.exports = {Color, Team, Person, Car}
