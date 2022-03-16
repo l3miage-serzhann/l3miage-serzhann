@@ -236,6 +236,7 @@ class Team {
         return this._members
     }
     // #issue1(related) ask prof about scnTeams2 doesnt have all the cases ( optimize the other function if its ok)
+    //git push https://l3miage-serzhann@github.com/l3miage-serzhann/l3miage-serzhann
     removeMember(member){
         if (!(member instanceof Person)){
             throw new Error("member must be a Person.")
